@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import BarbeariaChocolateMobile from './barbearia-chocolate-mobile';
+import Mobile from './mobile';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BarbeariaChocolateMobile />
+    <Mobile />
   </React.StrictMode>
 );
 
