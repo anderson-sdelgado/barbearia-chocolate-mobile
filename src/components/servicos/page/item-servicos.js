@@ -9,6 +9,24 @@ import PropTypes from 'prop-types';
 
 function ItemServicos(props) {
 
+    function visivelAdd(estado) {
+        return estado === 'S' ? '' : 'hidden';
+    }
+
+    function visivelRem(estado) {
+        return estado === 'N' ? '' : 'hidden';
+    }
+
+    function handleAlterarServicos(event, servico){
+        event.preventDefault();
+        props.handleAdicionarServico(servico);
+    }
+
+    function handleRemoverServicos(event, servico){
+        event.preventDefault();
+        props.handleRemoverServico(servico);
+    }
+
     return (
         props.servicos.map(servico => 
             <Card
@@ -21,19 +39,34 @@ function ItemServicos(props) {
                 <Card.Body>
                     <Form.Label
                         column
-                        sm={9}>
+                        xs={9}>
                         {servico.descricao}
                     </Form.Label>
                     <Form.Label
                         column
-                        sm={3}>
+                        xs={3}>
                         {servico.valor}
                     </Form.Label>
                     <Row
                         style={{  
                             marginTop: "0.5rem" }} >
                         <Col>
-                            <Button variant="primary" className="btn btn-primary w-20" >Reservar</Button>
+                            <div 
+                                className={visivelAdd(servico.estado)}>
+                                <Button 
+                                    className='btn btn-primary w-20'
+                                    onClick={(event) => handleAlterarServicos(event, servico)} >
+                                    Reservar
+                                </Button>
+                            </div>
+                            <div 
+                                className={visivelRem(servico.estado)}>
+                                <Button 
+                                    className='btn btn-danger w-20'
+                                    onClick={(event) => handleRemoverServicos(event, servico)} >
+                                    Cancelar
+                                </Button>
+                            </div>
                         </Col>
                     </Row>
                 </Card.Body>
@@ -45,6 +78,8 @@ function ItemServicos(props) {
 
 ItemServicos.propTypes = {
     servicos: PropTypes.array.isRequired,
+    handleAdicionarServico: PropTypes.func.isRequired,
+    handleRemoverServico: PropTypes.func.isRequired,
 }
 
 export default ItemServicos;
